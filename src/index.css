@@ -1,0 +1,14 @@
+header, footer {
+    padding: 2em 1em 0.5em 1em;
+    color: white;
+    background-color: rgba(70, 131, 180, 0.85);
+    font-family: 'Arial';font-size: 20px;
+    clear: left;
+    text-align: center;
+}
+
+body {
+    background: url(/resource/zurich-map.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
