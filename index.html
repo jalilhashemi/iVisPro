@@ -9,15 +9,27 @@
     crossorigin="anonymous">
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="src/index.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
 
 </head>
+
 <body>
   <header>
     <h1>Changes in foreign resident population of the city of Zürich since 1971</h1>
- </header>
-   
-  <!-- <img src="resource/zurich-map.png" class="rounded mx-auto d-block" alt="..." style="width:500px;height:600px;"> -->
-
+  </header>
+  <div class="container">
+    <div class="row">
+      <svg width="960" height="500"></svg>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <button id="start" type="button" class="my-button btn btn-primary">Start Time Animation</button>
+      </div>
+      <div class="col-4">
+        <button id="reset" type="button" class="my-button btn btn-primary">Reset</button>
+      </div>
+    </div>
+  </div>
   <footer></footer>
   <script src='lib/d3.v4.js'></script>
   <script src='lib/lodash.js'></script>
