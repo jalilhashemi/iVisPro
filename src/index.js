@@ -32,7 +32,7 @@ var svg = d3.select("svg"),
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var x = d3.scaleTime()
+var x = d3.scaleLinear()
     .rangeRound([0, width]);
 
 var y = d3.scaleLinear()
@@ -51,10 +51,10 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
     y.domain(d3.extent(data, function (d) { return d.percent; }));
-
+    xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
+        .call(xaxis)
         .append("text")
         .attr("fill", "#000")
         .attr("transform", "rotate(0)")

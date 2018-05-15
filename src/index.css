@@ -1,32 +1,29 @@
 header {
     padding: 2em 1em 0.5em 1em;
     color: white;
-    background-color: rgba(70, 131, 180);
-    font-family: 'Arial';font-size: 20px;
+    background-color: rgb(70, 131, 180);
+    font-family: 'Arial';font-size: 1.5px;
     clear: left;
     text-align: center;
 }
 
-#background{
-    background: url(/resource/zurich-map.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* opacity: 0.5; */
-}
-
 .my-button {
-    width: 200px;
+    width: 140px;
     height: 40px;
-    background-color: rgba(70, 131, 180);
+    background-color: rgb(70, 131, 180);
     border: none;
-    margin-top: 3em;
+    margin-top: 2em;
+    
 }
 
 .my-button:hover{
-    background-color: rgb(255, 166, 0);
-    color: black;
+    background-color: rgb(51, 94, 129);
 }
 
 #line-chart {
-   padding-top: 5em;
+   padding-top: 4em;
+}
+
+h5 {
+    padding-left:1.2em;
 }
