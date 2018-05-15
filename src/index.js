@@ -55,7 +55,13 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
-        .select(".domain")
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(0)")
+        .attr("y", -6)
+        .attr("dx", "0.71em")
+        .attr("text-anchor", "start")
+        .text("years");
 
     g.append("g")
         .call(d3.axisLeft(y))
@@ -67,12 +73,29 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
         .attr("text-anchor", "end")
         .text("percent of foreigners in Zürich");
 
-    path = svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("d", line);
+    d3.select("#start").on("click", function () {
+        var path = svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 3)
+            .attr("class", "line")
+            .attr("d", line);
+
+        var totalLength = path.node().getTotalLength();
+
+        path
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(6000)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+    });
+
+    d3.select("#reset").on("click", function () {
+        d3.select(".line").remove();
+    });
 });

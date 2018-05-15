@@ -1,16 +1,17 @@
 header {
     padding: 2em 1em 0.5em 1em;
     color: white;
-    background-color: rgba(70, 131, 180, 0.85);
+    background-color: rgba(70, 131, 180);
     font-family: 'Arial';font-size: 20px;
     clear: left;
     text-align: center;
 }
 
-body {
+#background{
     background: url(/resource/zurich-map.png);
     background-repeat: no-repeat;
     background-size: cover;
+    /* opacity: 0.5; */
 }
 
 .my-button {
@@ -18,4 +19,14 @@ body {
     height: 40px;
     background-color: rgba(70, 131, 180);
     border: none;
+    margin-top: 3em;
+}
+
+.my-button:hover{
+    background-color: rgb(255, 166, 0);
+    color: black;
+}
+
+#line-chart {
+   padding-top: 5em;
 }
