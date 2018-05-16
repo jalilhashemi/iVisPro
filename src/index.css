@@ -27,3 +27,13 @@ header {
 h5 {
     padding-left:1.2em;
 }
+
+p {
+    padding-left:3.8em;
+    font-size: 0.8em;
+}
+#my-link {
+    padding-left:0em;
+    font-size: 0.8em;
+}
+
