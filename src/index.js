@@ -1,21 +1,3 @@
-// d3.csv("./data/influx.csv", function (error, data) {
-//     data.forEach(function (d) {
-//         d.yearInflux = +d.StichtagDatJahr;
-//         d.influxM = +d.aus_m;
-//         d.influxW = +d.aus_f;
-//         console.log(d.yearInflux, d.influxM, d.influxW);
-//     });
-// });
-
-// d3.csv("./data/outflux.csv", function (error, data) {
-//     data.forEach(function (d) {
-//         d.yearOutflux = +d.StichtagDatJahr;
-//         d.outfluxM = +d.aus_m;
-//         d.outfluxW = +d.aus_f;
-//         console.log(d.yearOutflux, d.outfluxM, d.outfluxW);
-//     });
-// });
-
 var margin = { top: 20, right: 50, bottom: 30, left: 50 },
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
