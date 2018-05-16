@@ -27,8 +27,8 @@ var svg = d3.select("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 bisectDate = d3.bisector(function (d) { return d.year; }).left,
-    formatValue = d3.format(",.1f"),
-    formatPercent = function (d) { return "%" + formatValue(d); };
+    formatPercent = d3.format(",.1f"),
+    hoverText = function (d) { return "%" + formatPercent(d); };
 
 var x = d3.scaleLinear()
     .rangeRound([0, width]);
@@ -123,7 +123,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
                 d1 = data[i],
                 d = x0 - d0.year > d1.year - x0 ? d1 : d0;
             focus.attr("transform", "translate(" + x(d.year) + "," + y(d.percent) + ")");
-            focus.select("text").text(formatPercent(d.percent));
+            focus.select("text").text(hoverText(d.percent) + " in " + (d.year));
         }
     });
 
