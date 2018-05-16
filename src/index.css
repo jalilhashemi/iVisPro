@@ -37,3 +37,19 @@ p {
     font-size: 0.8em;
 }
 
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 50px;					
+    height: 60px;					
+    padding: 2px;		
+    margin-left: 35px;
+    margin-top: -60px;
+    font: 12px sans-serif;		
+    background: rgb(70, 131, 180);
+    color: white;	
+    border: 1px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}
+

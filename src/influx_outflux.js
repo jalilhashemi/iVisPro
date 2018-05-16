@@ -19,25 +19,46 @@ var x = d3.scaleLinear()
 var y = d3.scaleLinear()
     .rangeRound([height, 0])
 
-var lineInM = d3.line()
+var lineInM = d3.area()
+    .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.inM); });
-var lineOutM = d3.line()
+    .y0(height)
+    .y1(function (d) { return y(d.inM); });
+
+var lineOutM = d3.area()
+    .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.outM); });
-var lineInW = d3.line()
+    .y0(height)
+    .y1(function (d) { return y(d.outM); });
+
+var lineInW = d3.area()
+    .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.inW); });
-var lineOutW = d3.line()
+    .y0(height)
+    .y1(function (d) { return y(d.inW); });
+
+var lineOutW = d3.area()
+    .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.outW); });
+    .y0(height)
+    .y1(function (d) { return y(d.outW); });
+
+
+
+var div = d3.select("#area2").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
+
 
 d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     d.year = +d.StichtagDatJahr;
-    d.outM = +d.aus_m_out;
     d.inM = +d.aus_m_in;
-    d.outW = +d.aus_f_out;
+    d.outM = +d.aus_m_out;
     d.inW = +d.aus_f_in;
+    d.outW = +d.aus_f_out;
+
     return d;
 }, function (error, data) {
     if (error) throw error;
@@ -69,8 +90,19 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
 
     chart2.append("path")
         .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#f4cc70")
+        .attr("fill", "#cb631833")
+        .attr("stroke", "#cb6318")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("class", "line")
+        .attr("d", lineInM);
+
+
+    chart2.append("path")
+        .datum(data)
+        .attr("fill", "#f5e35633")
+        .attr("stroke", "#f5e356")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
@@ -79,31 +111,174 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
 
     chart2.append("path")
         .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#de7a2")
+        .attr("fill", "#34888c33")
+        .attr("stroke", "#34888c")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
-        .attr("d", lineInM);
+        .attr("d", lineInW);
 
     chart2.append("path")
         .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#6ab187")
+        .attr("fill", "#7caa2d33")
+        .attr("stroke", "#7caa2d")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
         .attr("d", lineOutW);
 
-    chart2.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#20948b")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
+
+
+
+
+    var svg_aline = chart2.append("line")
         .attr("class", "line")
-        .attr("d", lineInW);
+        .style("stroke-dasharray", ("3, 10"))
+        .attr("x1", 100)
+        .attr("x2", 400)
+        .attr("y1", 200)
+        .attr("y2", 200)
+        .style("display", "None")
+
+    //incoming male
+    chart2.selectAll("dot").data(data)
+        .enter()
+        .append("circle")
+        .attr("r", 8)
+        .attr("cx", function (d) { return x(d.year) })
+        .attr("cy", function (d) { return y(d.inM); })
+        .attr("class", "dot")
+        .on("mouseover", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "gray")
+                .attr("r", 12);
+            div.transition()
+                .duration(200)
+                .style("opacity", .8);
+            div.html(d.year + '<br>' + "came" + '<br>' + d.inM + '<br>' + "male")
+                .style("left", x(d.year) + "px")
+                .style("top", y(d.inM) + "px");
+            svg_aline.transition().duration(10)
+                .style("display", "block")
+                .attr("x1", x(d.year))
+                .attr("y1", y(d.inM))
+                .attr("x2", x(d.year))
+                .attr("y2", height)
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "grey")
+                .attr("r", 8);
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+            svg_aline.style("display", "None")
+        });
+
+    //outgoing male
+    chart2.selectAll("dot").data(data)
+        .enter()
+        .append("circle")
+        .attr("r", 8)
+        .attr("cx", function (d) { return x(d.year) })
+        .attr("cy", function (d) { return y(d.outM); })
+        .attr("class", "dot")
+        .on("mouseover", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "grey")
+                .attr("r", 12);
+            div.transition()
+                .duration(200)
+                .style("opacity", .8);
+            div.html(d.year + '<br>' + "left" + '<br>' + d.outM + '<br>' + "male")
+                .style("left", x(d.year) + "px")
+                .style("top", y(d.outM) + "px");
+            svg_aline.transition().duration(10)
+                .style("display", "block")
+                .attr("x1", x(d.year))
+                .attr("y1", y(d.outM))
+                .attr("x2", x(d.year))
+                .attr("y2", height)
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "grey")
+                .attr("r", 8);
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+            svg_aline.style("display", "None")
+        });
+
+        //incoming female
+    chart2.selectAll("dot").data(data)
+    .enter()
+    .append("circle")
+    .attr("r", 8)
+    .attr("cx", function (d) { return x(d.year) })
+    .attr("cy", function (d) { return y(d.inW); })
+    .attr("class", "dot")
+    .on("mouseover", function (d) {
+        d3.select(this).transition().duration(100)
+            .style("fill", "grey")
+            .attr("r", 12);
+        div.transition()
+            .duration(200)
+            .style("opacity", .8);
+        div.html(d.year + '<br>' + " came " + '<br>' + d.inW + '<br>' + " female ")
+            .style("left", x(d.year) + "px")
+            .style("top", y(d.inW) + "px");
+        svg_aline.transition().duration(10)
+            .style("display", "block")
+            .attr("x1", x(d.year))
+            .attr("y1", y(d.inW))
+            .attr("x2", x(d.year))
+            .attr("y2", height)
+    })
+    .on("mouseout", function (d) {
+        d3.select(this).transition().duration(100)
+            .style("fill", "grey")
+            .attr("r", 8);
+        div.transition()
+            .duration(500)
+            .style("opacity", 0);
+        svg_aline.style("display", "None")
+    });
+
+        //outgoing female
+        chart2.selectAll("dot").data(data)
+        .enter()
+        .append("circle")
+        .attr("r", 8)
+        .attr("cx", function (d) { return x(d.year) })
+        .attr("cy", function (d) { return y(d.outW); })
+        .attr("class", "dot")
+        .on("mouseover", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "grey")
+                .attr("r", 12);
+            div.transition()
+                .duration(200)
+                .style("opacity", .8);
+            div.html(d.year + '<br>' + " left " + '<br>' + d.outW + '<br>' + " female ")
+                .style("left", x(d.year) + "px")
+                .style("top", y(d.outW) + "px");
+            svg_aline.transition().duration(10)
+                .style("display", "block")
+                .attr("x1", x(d.year))
+                .attr("y1", y(d.outW))
+                .attr("x2", x(d.year))
+                .attr("y2", height)
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "grey")
+                .attr("r", 8);
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+            svg_aline.style("display", "None")
+        });
 });
