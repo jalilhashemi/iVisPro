@@ -12,17 +12,20 @@ header {
     height: 40px;
     background-color: rgb(70, 131, 180);
     border: none;
-    margin-top: 2em;
-    
+    margin-top: -3em;
 }
 
 .my-button:hover{
     background-color: rgb(51, 94, 129);
 }
 
-#line-chart {
+#chart1 {
    padding-top: 4em;
 }
+
+#chart2 {
+    padding-top: 8em;
+ }
 
 h5 {
     padding-left:1.2em;
@@ -43,8 +46,8 @@ div.tooltip {
     width: 50px;					
     height: 60px;					
     padding: 2px;		
-    margin-left: 35px;
-    margin-top: -60px;
+    margin-left: 40px;
+    margin-top: -25px;
     font: 12px sans-serif;		
     background: rgb(70, 131, 180);
     color: white;	
@@ -53,3 +56,25 @@ div.tooltip {
     pointer-events: none;			
 }
 
+.tooltip-line {
+    fill: none;
+    stroke: white;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.dotInM {
+    fill: #f5e356;
+  }
+
+  .dotOutM {
+    fill: #cb6318;
+  }
+
+  .dotInW {
+    fill: #34888c;
+  }
+
+  .dotOutW {
+    fill: #7caa2d;
+  }

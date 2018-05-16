@@ -43,14 +43,9 @@ var lineOutW = d3.area()
     .y0(height)
     .y1(function (d) { return y(d.outW); });
 
-
-
 var div = d3.select("#area2").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
-
-
-
 
 d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     d.year = +d.StichtagDatJahr;
@@ -64,7 +59,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     if (error) throw error;
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
-    y.domain([0, d3.max(data, function (d) { return d.outM; })]);
+    y.domain([2000, d3.max(data, function (d) { return d.outM; })]);
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
 
     chart2.append("g")
@@ -90,19 +85,18 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
 
     chart2.append("path")
         .datum(data)
-        .attr("fill", "#cb631833")
-        .attr("stroke", "#cb6318")
+        .attr("fill", "#f5e35633")
+        .attr("stroke", "#f5e356")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
         .attr("d", lineInM);
 
-
     chart2.append("path")
         .datum(data)
-        .attr("fill", "#f5e35633")
-        .attr("stroke", "#f5e356")
+        .attr("fill", "#cb631833")
+        .attr("stroke", "#cb6318")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
@@ -129,12 +123,8 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("class", "line")
         .attr("d", lineOutW);
 
-
-
-
-
     var svg_aline = chart2.append("line")
-        .attr("class", "line")
+        .attr("class", "tooltip-line")
         .style("stroke-dasharray", ("3, 10"))
         .attr("x1", 100)
         .attr("x2", 400)
@@ -149,10 +139,10 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("r", 8)
         .attr("cx", function (d) { return x(d.year) })
         .attr("cy", function (d) { return y(d.inM); })
-        .attr("class", "dot")
+        .attr("class", "dotInM")
         .on("mouseover", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "gray")
+                .style("fill", "#f5e356")
                 .attr("r", 12);
             div.transition()
                 .duration(200)
@@ -169,7 +159,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         })
         .on("mouseout", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "grey")
+                .style("fill", "#f5e356")
                 .attr("r", 8);
             div.transition()
                 .duration(500)
@@ -184,10 +174,10 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("r", 8)
         .attr("cx", function (d) { return x(d.year) })
         .attr("cy", function (d) { return y(d.outM); })
-        .attr("class", "dot")
+        .attr("class", "dotOutM")
         .on("mouseover", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "grey")
+                .style("fill", "#cb6318")
                 .attr("r", 12);
             div.transition()
                 .duration(200)
@@ -204,7 +194,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         })
         .on("mouseout", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "grey")
+                .style("fill", "#cb6318")
                 .attr("r", 8);
             div.transition()
                 .duration(500)
@@ -212,52 +202,52 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             svg_aline.style("display", "None")
         });
 
-        //incoming female
+    //incoming female
     chart2.selectAll("dot").data(data)
-    .enter()
-    .append("circle")
-    .attr("r", 8)
-    .attr("cx", function (d) { return x(d.year) })
-    .attr("cy", function (d) { return y(d.inW); })
-    .attr("class", "dot")
-    .on("mouseover", function (d) {
-        d3.select(this).transition().duration(100)
-            .style("fill", "grey")
-            .attr("r", 12);
-        div.transition()
-            .duration(200)
-            .style("opacity", .8);
-        div.html(d.year + '<br>' + " came " + '<br>' + d.inW + '<br>' + " female ")
-            .style("left", x(d.year) + "px")
-            .style("top", y(d.inW) + "px");
-        svg_aline.transition().duration(10)
-            .style("display", "block")
-            .attr("x1", x(d.year))
-            .attr("y1", y(d.inW))
-            .attr("x2", x(d.year))
-            .attr("y2", height)
-    })
-    .on("mouseout", function (d) {
-        d3.select(this).transition().duration(100)
-            .style("fill", "grey")
-            .attr("r", 8);
-        div.transition()
-            .duration(500)
-            .style("opacity", 0);
-        svg_aline.style("display", "None")
-    });
+        .enter()
+        .append("circle")
+        .attr("r", 8)
+        .attr("cx", function (d) { return x(d.year) })
+        .attr("cy", function (d) { return y(d.inW); })
+        .attr("class", "dotInW")
+        .on("mouseover", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "#34888c")
+                .attr("r", 12);
+            div.transition()
+                .duration(200)
+                .style("opacity", .8);
+            div.html(d.year + '<br>' + " came " + '<br>' + d.inW + '<br>' + " female ")
+                .style("left", x(d.year) + "px")
+                .style("top", y(d.inW) + "px");
+            svg_aline.transition().duration(10)
+                .style("display", "block")
+                .attr("x1", x(d.year))
+                .attr("y1", y(d.inW))
+                .attr("x2", x(d.year))
+                .attr("y2", height)
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).transition().duration(100)
+                .style("fill", "#34888c")
+                .attr("r", 8);
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+            svg_aline.style("display", "None")
+        });
 
-        //outgoing female
-        chart2.selectAll("dot").data(data)
+    //outgoing female
+    chart2.selectAll("dot").data(data)
         .enter()
         .append("circle")
         .attr("r", 8)
         .attr("cx", function (d) { return x(d.year) })
         .attr("cy", function (d) { return y(d.outW); })
-        .attr("class", "dot")
+        .attr("class", "dotOutW")
         .on("mouseover", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "grey")
+                .style("fill", "#7caa2d")
                 .attr("r", 12);
             div.transition()
                 .duration(200)
@@ -274,7 +264,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         })
         .on("mouseout", function (d) {
             d3.select(this).transition().duration(100)
-                .style("fill", "grey")
+                .style("fill", "#7caa2d")
                 .attr("r", 8);
             div.transition()
                 .duration(500)

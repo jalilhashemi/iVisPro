@@ -15,25 +15,30 @@
   <header>
     <h1>Changes in foreign resident population of the city of Zürich</h1>
   </header>
-  <div class="container" id="line-chart">
-    <h5>Economic resident population of the city of Zurich by origin since 1901</h5>
-    <div class="row">
+  <div class="container">
+    <div class="row justify-content-md-center" id="chart1">
       <div class="col-10">
-          <div id="area1"></div>
+        <h5>Resident population of the city of Zürich by origin since 1901</h5>
+        <div id="area1"></div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center" id="chart1">
+      <div class="col-2">
+        <button id="start" type="button" class="my-button btn btn-primary">Start Animation</button>
+      </div>
+      <div class="col-2">
+        <button id="reset" type="button" class="my-button btn btn-primary">Reset</button>
+      </div>
+    </div>
+    <div class="row justify-content-md-center" id="chart2">
+      <div class="col-10">
+        <h5>Influx and outflux since 1971</h5>
+        <div id="area2"></div>
         <p>Visualized data is taken from
           <a href="https://opendata.swiss/de/dataset/bevolkerungsbestand-nach-jahr-herkunft-und-geschlecht-seit-1901/resource/c1c1a976-3b69-4f38-bcce-1a05f5b7696d">
             <i>opendata.swiss</i>
           </a>
         </p>
-      </div>
-      <div class="col-2">
-        <button id="start" type="button" class="my-button btn btn-primary">Start Animation</button>
-        <button id="reset" type="button" class="my-button btn btn-primary">Reset</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-10">
-          <div id="area2"></div>
       </div>
     </div>
   </div>

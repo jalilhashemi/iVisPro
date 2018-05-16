@@ -11,7 +11,7 @@ var chart1 = d3.select("#area1")
 
 bisectDate = d3.bisector(function (d) { return d.year; }).left,
     formatPercent = d3.format(",.1f"),
-    hoverText = function (d) { return "%" + formatPercent(d); };
+    hoverText = function (d) { return formatPercent(d) + "%"; };
 
 var x = d3.scaleLinear()
     .rangeRound([0, width]);
@@ -67,9 +67,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
             .attr("d", line);
 
         var totalLength = path.node().getTotalLength();
-
-        path
-            .attr("stroke-dasharray", totalLength + " " + totalLength)
+        path.attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
             .duration(6000)
