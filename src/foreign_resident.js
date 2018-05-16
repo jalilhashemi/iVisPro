@@ -2,7 +2,8 @@ var margin = { top: 20, right: 50, bottom: 30, left: 50 },
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var svg = d3.select("svg")
+var chart1 = d3.select("#area1")
+    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -33,7 +34,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
     y.domain(d3.extent(data, function (d) { return d.percent; }));
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
 
-    svg.append("g")
+    chart1.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(xaxis)
         .append("text")
@@ -44,7 +45,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
         .attr("text-anchor", "start")
         .text("years");
 
-    svg.append("g")
+    chart1.append("g")
         .call(d3.axisLeft(y))
         .append("text")
         .attr("fill", "#000")
@@ -55,7 +56,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
         .text("percent of foreigners in Zürich");
 
     d3.select("#start").on("click", function () {
-        var path = svg.append("path")
+        var path = chart1.append("path")
             .datum(data)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
@@ -75,7 +76,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0);
 
-        var focus = svg.append("g")
+        var focus = chart1.append("g")
             .attr("class", "focus")
             .style("display", "none");
 
@@ -88,7 +89,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
             .attr("x", 9)
             .attr("dy", ".35em");
 
-        svg.append("rect")
+        chart1.append("rect")
             .attr("class", "overlay")
             .attr("fill", "none")
             .attr("pointer-events", "all")

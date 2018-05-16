@@ -9,7 +9,6 @@
     crossorigin="anonymous">
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="src/index.css">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +19,7 @@
     <h5>Economic resident population of the city of Zurich by origin since 1901</h5>
     <div class="row">
       <div class="col-10">
-        <svg></svg>
+          <div id="area1"></div>
         <p>Visualized data is taken from
           <a href="https://opendata.swiss/de/dataset/bevolkerungsbestand-nach-jahr-herkunft-und-geschlecht-seit-1901/resource/c1c1a976-3b69-4f38-bcce-1a05f5b7696d">
             <i>opendata.swiss</i>
@@ -32,19 +31,17 @@
         <button id="reset" type="button" class="my-button btn btn-primary">Reset</button>
       </div>
     </div>
-
     <div class="row">
       <div class="col-10">
-        <svg id="svg2"></svg>
+          <div id="area2"></div>
       </div>
     </div>
-
   </div>
   <footer></footer>
   <script src='lib/d3.v4.js'></script>
   <script src='lib/lodash.js'></script>
-  <script src='src/index.js'></script>
-  <script src='src/test.js'></script>
+  <script src='src/foreign_resident.js'></script>
+  <script src='src/influx_outflux.js'></script>
 </body>
 
 </html>
