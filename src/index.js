@@ -1,13 +1,3 @@
-// d3.csv("./data/resident-population-of-Zurich.csv", function (error, data) {
-//     // Wirtschaftliche Wohnbevölkerung der Stadt Zürich
-//     data.forEach(function (d) {
-//         d.year = +d.StichtagDatJahr;
-//         d.perceOfForeigner = +d.AuslAnt;
-//         console.log(d.year, d.perceOfForeigner);
-//     });
-
-// });
-
 // d3.csv("./data/influx.csv", function (error, data) {
 //     data.forEach(function (d) {
 //         d.yearInflux = +d.StichtagDatJahr;
