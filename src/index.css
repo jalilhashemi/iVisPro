@@ -1,10 +1,26 @@
 header {
-    padding: 2em 1em 0.5em 1em;
     color: white;
     background-color: rgb(70, 131, 180);
     font-family: 'Arial';font-size: 1.5px;
+    height: 100px;
+    text-align: center;
+}
+
+footer {
+    height: 50px;
+    color: white;
+    background-color: rgb(70, 131, 180);
     clear: left;
     text-align: center;
+    
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(228, 228, 228);
 }
 
 .my-button {
@@ -12,27 +28,31 @@ header {
     height: 40px;
     background-color: rgb(70, 131, 180);
     border: none;
-    margin-top: -3em;
+    margin-top: 20px;
 }
 
 .my-button:hover{
     background-color: rgb(51, 94, 129);
 }
 
-#chart1 {
+#my-chart1 {
    padding-top: 4em;
 }
 
-#chart2 {
-    padding-top: 8em;
+#my-chart2 {
+    padding: 8em 0 8em 0;
  }
 
 h5 {
     padding-left:1.2em;
 }
 
+h1 {
+    padding-top: 25px;
+}
+
 p {
-    padding-left:3.8em;
+    padding-top: 15px;
     font-size: 0.8em;
 }
 #my-link {
