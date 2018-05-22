@@ -18,6 +18,15 @@ bisectDate = d3.bisector(function (d) { return d.year; }).left,
 var x = d3.scaleLinear()
     .rangeRound([0, width]);
 
+    var svg_aline = chart1.append("line")
+        .attr("class", "tooltip-line")
+        .style("stroke-dasharray", ("3, 10"))
+        .attr("x1", 100)
+        .attr("x2", 400)
+        .attr("y1", 200)
+        .attr("y2", 200)
+        .style("display", "None")
+
 var y = d3.scaleLinear()
     .rangeRound([height, 0]);
 
@@ -108,6 +117,13 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
                 d = x0 - d0.year > d1.year - x0 ? d1 : d0;
             focus.attr("transform", "translate(" + x(d.year) + "," + y(d.percent) + ")");
             focus.select("text").text(hoverText(d.percent) + " in " + (d.year));
+
+            svg_aline.transition().duration(10)
+                .style("display", "block")
+                .attr("x1", x(d.year))
+                .attr("y1", y(d.percent))
+                .attr("x2", x(d.year))
+                .attr("y2", height)
         }
     });
 
