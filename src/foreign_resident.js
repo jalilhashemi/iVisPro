@@ -1,3 +1,5 @@
+function plot2() {
+    
 var margin = { top: 20, right: 50, bottom: 30, left: 50 },
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -58,6 +60,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
     d3.select("#start").on("click", function () {
         var path = chart1.append("path")
             .datum(data)
+            
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-linejoin", "round")
@@ -112,4 +115,6 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
         d3.select(".line").remove();
         d3.select(".overlay").remove();
     });
-});
+})};
+
+plot2();
