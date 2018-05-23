@@ -19,29 +19,45 @@ var x = d3.scaleLinear()
 var y = d3.scaleLinear()
     .rangeRound([height, 0])
 
-var lineInM = d3.area()
+var areaInM = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
     .y1(function (d) { return y(d.inM); });
 
-var lineOutM = d3.area()
+var lineInM = d3.line()
+    .x(function (d) { return x(d.year); })
+    .y(function (d) { return y(d.inM); });
+
+var areaOutM = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
     .y1(function (d) { return y(d.outM); });
 
-var lineInW = d3.area()
+    var lineOutM = d3.line()
+    .x(function (d) { return x(d.year); })
+    .y(function (d) { return y(d.outM); });
+
+var areaInW = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
     .y1(function (d) { return y(d.inW); });
 
-var lineOutW = d3.area()
+    var lineInW = d3.line()
+    .x(function (d) { return x(d.year); })
+    .y(function (d) { return y(d.inW); });
+
+var areaOutW = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
     .y1(function (d) { return y(d.outW); });
+
+    var lineOutW = d3.line()
+    .x(function (d) { return x(d.year); })
+    .y(function (d) { return y(d.outW); });
 
 var div = d3.select("#area2").append("div")
     .attr("class", "tooltip")
@@ -86,6 +102,16 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     chart2.append("path")
         .datum(data)
         .attr("fill", "#f5e35633")
+        .attr("stroke", "none")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("class", "line")
+        .attr("d", areaInM);
+
+    chart2.append("path")
+        .datum(data)
+        .attr("fill", "none")
         .attr("stroke", "#f5e356")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -96,6 +122,16 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     chart2.append("path")
         .datum(data)
         .attr("fill", "#cb631833")
+        .attr("stroke", "none")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("class", "line")
+        .attr("d", areaOutM);
+
+        chart2.append("path")
+        .datum(data)
+        .attr("fill", "none")
         .attr("stroke", "#cb6318")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -106,6 +142,16 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     chart2.append("path")
         .datum(data)
         .attr("fill", "#34888c33")
+        .attr("stroke", "none")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("class", "line")
+        .attr("d", areaInW);
+
+        chart2.append("path")
+        .datum(data)
+        .attr("fill", "none")
         .attr("stroke", "#34888c")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -116,6 +162,16 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     chart2.append("path")
         .datum(data)
         .attr("fill", "#7caa2d33")
+        .attr("stroke", "none")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("class", "line")
+        .attr("d", areaOutW);
+
+        chart2.append("path")
+        .datum(data)
+        .attr("fill", "none")
         .attr("stroke", "#7caa2d")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")

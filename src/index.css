@@ -1,26 +1,16 @@
-header {
-    color: white;
-    background-color: rgb(70, 131, 180);
-    font-family: 'Arial';font-size: 1.5px;
-    height: 100px;
-    text-align: center;
-}
-
 footer {
     height: 50px;
-    color: white;
-    background-color: rgb(70, 131, 180);
+    background-color: #e9ecef;
     clear: left;
     text-align: center;
-    
 }
 
 a {
-    color: white;
+    color: rgba(27, 27, 27, 0.788);
 }
 
 a:hover {
-    color: rgb(228, 228, 228);
+    color: black;
 }
 
 .my-button {
@@ -118,4 +108,9 @@ div.tooltip {
 
 .legend-spacing {
     margin: 0 !important;
+}
+
+#area1 {
+    background-image: url("/resource/evolution.jpg");
+    background-repeat: no-repeat, repeat;
 }
