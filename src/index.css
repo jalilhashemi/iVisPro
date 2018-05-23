@@ -78,7 +78,7 @@ div.tooltip {
 
 .tooltip-line {
     fill: none;
-    stroke: black;
+    stroke: white;
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
