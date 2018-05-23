@@ -33,8 +33,9 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
     if (error) throw error;
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
-    y.domain(d3.extent(data, function (d) { return d.percent; }));
+    y.domain([0,35]);
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
+    yAxis = d3.axisLeft().tickFormat(d => d + "%").scale(y);
 
     chart1.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -48,7 +49,7 @@ d3.csv("./data/resident-population-of-Zurich.csv", function (d) {
         .text("years");
 
     chart1.append("g")
-        .call(d3.axisLeft(y))
+        .call(yAxis)
         .append("text")
         .attr("fill", "#000")
         .attr("transform", "rotate(-90)")

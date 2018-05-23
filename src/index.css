@@ -83,18 +83,39 @@ div.tooltip {
     shape-rendering: crispEdges;
 }
 
-.dotInM {
+.dotInM, .in-male {
     fill: #f5e356;
+    background: #f5e356;
   }
 
-  .dotOutM {
+  .dotOutM, .out-male {
     fill: #cb6318;
+    background: #cb6318;
   }
 
-  .dotInW {
+  .dotInW, .in-female{
     fill: #34888c;
+    background: #34888c;
   }
 
-  .dotOutW {
+  .dotOutW, .out-female{
     fill: #7caa2d;
+    background: #7caa2d;
+    
   }
+
+.key-dot {
+    border-radius: 50%;
+    display: inline-block;
+    height: 16px;
+    margin-right: .5em;
+    width: 16px;
+}
+
+.legend {
+    margin-top:125px;
+}
+
+.legend-spacing {
+    margin: 0 !important;
+}

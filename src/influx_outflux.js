@@ -59,7 +59,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     if (error) throw error;
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
-    y.domain([2000, d3.max(data, function (d) { return d.outM; })]);
+    y.domain([2000, 18000]);
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
 
     chart2.append("g")
