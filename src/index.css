@@ -73,25 +73,14 @@ div.tooltip {
     shape-rendering: crispEdges;
 }
 
-.dotInM, .in-male {
+.dotInflux, .influx {
     fill: #f5e356;
     background: #f5e356;
   }
 
-  .dotOutM, .out-male {
+  .dotOutflux, .outflux {
     fill: #cb6318;
     background: #cb6318;
-  }
-
-  .dotInW, .in-female{
-    fill: #34888c;
-    background: #34888c;
-  }
-
-  .dotOutW, .out-female{
-    fill: #7caa2d;
-    background: #7caa2d;
-    
   }
 
 .key-dot {
@@ -103,7 +92,7 @@ div.tooltip {
 }
 
 .legend {
-    margin-top:125px;
+    margin-top:85px;
 }
 
 .legend-spacing {

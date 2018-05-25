@@ -19,45 +19,27 @@ var x = d3.scaleLinear()
 var y = d3.scaleLinear()
     .rangeRound([height, 0])
 
-var areaInM = d3.area()
+var areaInflux = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
-    .y1(function (d) { return y(d.inM); });
+    .y1(function (d) { return y(d.influx); });
 
-var lineInM = d3.line()
+var lineInflux = d3.line()
+  .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.inM); });
+    .y(function (d) { return y(d.influx); });
 
-var areaOutM = d3.area()
+var areaOutflux = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y0(height)
-    .y1(function (d) { return y(d.outM); });
+    .y1(function (d) { return y(d.outflux); });
 
-    var lineOutM = d3.line()
-    .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.outM); });
-
-var areaInW = d3.area()
+    var lineOutflux= d3.line()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
-    .y0(height)
-    .y1(function (d) { return y(d.inW); });
-
-    var lineInW = d3.line()
-    .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.inW); });
-
-var areaOutW = d3.area()
-    .curve(d3.curveMonotoneX)
-    .x(function (d) { return x(d.year); })
-    .y0(height)
-    .y1(function (d) { return y(d.outW); });
-
-    var lineOutW = d3.line()
-    .x(function (d) { return x(d.year); })
-    .y(function (d) { return y(d.outW); });
+    .y(function (d) { return y(d.outflux); });
 
 var div = d3.select("#area2").append("div")
     .attr("class", "tooltip")
@@ -65,17 +47,15 @@ var div = d3.select("#area2").append("div")
 
 d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     d.year = +d.StichtagDatJahr;
-    d.inM = +d.aus_m_in;
-    d.outM = +d.aus_m_out;
-    d.inW = +d.aus_f_in;
-    d.outW = +d.aus_f_out;
+    d.influx = +d.aus_m_in + +d.aus_f_in;
+    d.outflux = +d.aus_m_out + +d.aus_f_out;
 
     return d;
 }, function (error, data) {
     if (error) throw error;
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
-    y.domain([2000, 18000]);
+    y.domain([10000, d3.max(data, function (d) { return d.influx; })]);
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
 
     chart2.append("g")
@@ -107,7 +87,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
-        .attr("d", areaInM);
+        .attr("d", areaInflux);
 
     chart2.append("path")
         .datum(data)
@@ -117,7 +97,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
-        .attr("d", lineInM);
+        .attr("d", lineInflux);
 
     chart2.append("path")
         .datum(data)
@@ -127,7 +107,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
-        .attr("d", areaOutM);
+        .attr("d", areaOutflux);
 
         chart2.append("path")
         .datum(data)
@@ -137,47 +117,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("class", "line")
-        .attr("d", lineOutM);
-
-    chart2.append("path")
-        .datum(data)
-        .attr("fill", "#34888c33")
-        .attr("stroke", "none")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("class", "line")
-        .attr("d", areaInW);
-
-        chart2.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#34888c")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("class", "line")
-        .attr("d", lineInW);
-
-    chart2.append("path")
-        .datum(data)
-        .attr("fill", "#7caa2d33")
-        .attr("stroke", "none")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("class", "line")
-        .attr("d", areaOutW);
-
-        chart2.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#7caa2d")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("class", "line")
-        .attr("d", lineOutW);
+        .attr("d", lineOutflux);
 
     var svg_aline = chart2.append("line")
         .attr("class", "tooltip-line")
@@ -188,14 +128,14 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("y2", 200)
         .style("display", "None")
 
-    //incoming male
+    //influx
     chart2.selectAll("dot").data(data)
         .enter()
         .append("circle")
         .attr("r", 8)
         .attr("cx", function (d) { return x(d.year) })
-        .attr("cy", function (d) { return y(d.inM); })
-        .attr("class", "dotInM")
+        .attr("cy", function (d) { return y(d.influx); })
+        .attr("class", "dotInflux")
         .on("mouseover", function (d) {
             d3.select(this).transition().duration(100)
                 .style("fill", "#f5e356")
@@ -203,13 +143,13 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             div.transition()
                 .duration(200)
                 .style("opacity", .8);
-            div.html(d.year + '<br>' + "came" + '<br>' + d.inM + '<br>' + "male")
+            div.html(d.year + '<br>' + "influx number" + '<br>' + d.influx)
                 .style("left", x(d.year) + "px")
-                .style("top", y(d.inM) + "px");
+                .style("top", y(d.influx) + "px");
             svg_aline.transition().duration(10)
                 .style("display", "block")
                 .attr("x1", x(d.year))
-                .attr("y1", y(d.inM))
+                .attr("y1", y(d.influx))
                 .attr("x2", x(d.year))
                 .attr("y2", height)
         })
@@ -223,14 +163,14 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             svg_aline.style("display", "None")
         });
 
-    //outgoing male
+    //outflux
     chart2.selectAll("dot").data(data)
         .enter()
         .append("circle")
         .attr("r", 8)
         .attr("cx", function (d) { return x(d.year) })
-        .attr("cy", function (d) { return y(d.outM); })
-        .attr("class", "dotOutM")
+        .attr("cy", function (d) { return y(d.outflux); })
+        .attr("class", "dotOutflux")
         .on("mouseover", function (d) {
             d3.select(this).transition().duration(100)
                 .style("fill", "#cb6318")
@@ -238,89 +178,19 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             div.transition()
                 .duration(200)
                 .style("opacity", .8);
-            div.html(d.year + '<br>' + "left" + '<br>' + d.outM + '<br>' + "male")
+            div.html(d.year + '<br>' + "outflux number" + '<br>' + d.outflux)
                 .style("left", x(d.year) + "px")
-                .style("top", y(d.outM) + "px");
+                .style("top", y(d.outflux) + "px");
             svg_aline.transition().duration(10)
                 .style("display", "block")
                 .attr("x1", x(d.year))
-                .attr("y1", y(d.outM))
+                .attr("y1", y(d.outflux))
                 .attr("x2", x(d.year))
                 .attr("y2", height)
         })
         .on("mouseout", function (d) {
             d3.select(this).transition().duration(100)
                 .style("fill", "#cb6318")
-                .attr("r", 8);
-            div.transition()
-                .duration(500)
-                .style("opacity", 0);
-            svg_aline.style("display", "None")
-        });
-
-    //incoming female
-    chart2.selectAll("dot").data(data)
-        .enter()
-        .append("circle")
-        .attr("r", 8)
-        .attr("cx", function (d) { return x(d.year) })
-        .attr("cy", function (d) { return y(d.inW); })
-        .attr("class", "dotInW")
-        .on("mouseover", function (d) {
-            d3.select(this).transition().duration(100)
-                .style("fill", "#34888c")
-                .attr("r", 12);
-            div.transition()
-                .duration(200)
-                .style("opacity", .8);
-            div.html(d.year + '<br>' + " came " + '<br>' + d.inW + '<br>' + " female ")
-                .style("left", x(d.year) + "px")
-                .style("top", y(d.inW) + "px");
-            svg_aline.transition().duration(10)
-                .style("display", "block")
-                .attr("x1", x(d.year))
-                .attr("y1", y(d.inW))
-                .attr("x2", x(d.year))
-                .attr("y2", height)
-        })
-        .on("mouseout", function (d) {
-            d3.select(this).transition().duration(100)
-                .style("fill", "#34888c")
-                .attr("r", 8);
-            div.transition()
-                .duration(500)
-                .style("opacity", 0);
-            svg_aline.style("display", "None")
-        });
-
-    //outgoing female
-    chart2.selectAll("dot").data(data)
-        .enter()
-        .append("circle")
-        .attr("r", 8)
-        .attr("cx", function (d) { return x(d.year) })
-        .attr("cy", function (d) { return y(d.outW); })
-        .attr("class", "dotOutW")
-        .on("mouseover", function (d) {
-            d3.select(this).transition().duration(100)
-                .style("fill", "#7caa2d")
-                .attr("r", 12);
-            div.transition()
-                .duration(200)
-                .style("opacity", .8);
-            div.html(d.year + '<br>' + " left " + '<br>' + d.outW + '<br>' + " female ")
-                .style("left", x(d.year) + "px")
-                .style("top", y(d.outW) + "px");
-            svg_aline.transition().duration(10)
-                .style("display", "block")
-                .attr("x1", x(d.year))
-                .attr("y1", y(d.outW))
-                .attr("x2", x(d.year))
-                .attr("y2", height)
-        })
-        .on("mouseout", function (d) {
-            d3.select(this).transition().duration(100)
-                .style("fill", "#7caa2d")
                 .attr("r", 8);
             div.transition()
                 .duration(500)
