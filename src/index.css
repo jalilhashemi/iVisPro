@@ -54,7 +54,7 @@ div.tooltip {
     position: absolute;			
     text-align: center;			
     width: 50px;					
-    height: 60px;					
+    height: 48px;					
     padding: 2px;		
     margin-left: 40px;
     margin-top: -25px;
@@ -71,6 +71,10 @@ div.tooltip {
     stroke: white;
     stroke-width: 1;
     shape-rendering: crispEdges;
+}
+
+.focus {
+    font: 12px sans-serif;	
 }
 
 .dotInflux, .influx {

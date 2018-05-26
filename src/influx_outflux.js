@@ -9,10 +9,6 @@ var chart2 = d3.select("#area2")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-bisectDate = d3.bisector(function (d) { return d.year; }).left,
-    formatPercent = d3.format(",.1f"),
-    hoverText = function (d) { return "%" + formatPercent(d); };
-
 var x = d3.scaleLinear()
     .rangeRound([0, width]);
 
@@ -26,7 +22,7 @@ var areaInflux = d3.area()
     .y1(function (d) { return y(d.influx); });
 
 var lineInflux = d3.line()
-  .curve(d3.curveMonotoneX)
+    .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y(function (d) { return y(d.influx); });
 
@@ -36,7 +32,7 @@ var areaOutflux = d3.area()
     .y0(height)
     .y1(function (d) { return y(d.outflux); });
 
-    var lineOutflux= d3.line()
+var lineOutflux = d3.line()
     .curve(d3.curveMonotoneX)
     .x(function (d) { return x(d.year); })
     .y(function (d) { return y(d.outflux); });
@@ -55,8 +51,9 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
     if (error) throw error;
 
     x.domain(d3.extent(data, function (d) { return d.year; }));
-    y.domain([10000, d3.max(data, function (d) { return d.influx; })]);
     xaxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
+    y.domain([10000, d3.max(data, function (d) { return d.influx; })]);
+    yAxis = d3.axisLeft().tickFormat(d => d).scale(y);
 
     chart2.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -70,14 +67,14 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .text("years");
 
     chart2.append("g")
-        .call(d3.axisLeft(y))
+        .call(yAxis)
         .append("text")
         .attr("fill", "#000")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
-        .text("Number of influx and outflux in Zürich");
+        .text("influx and outflux of immigrants");
 
     chart2.append("path")
         .datum(data)
@@ -109,7 +106,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
         .attr("class", "line")
         .attr("d", areaOutflux);
 
-        chart2.append("path")
+    chart2.append("path")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", "#cb6318")
@@ -143,7 +140,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             div.transition()
                 .duration(200)
                 .style("opacity", .8);
-            div.html(d.year + '<br>' + "influx number" + '<br>' + d.influx)
+            div.html(d.year + '<br>' + "influx" + '<br>' + d.influx)
                 .style("left", x(d.year) + "px")
                 .style("top", y(d.influx) + "px");
             svg_aline.transition().duration(10)
@@ -178,7 +175,7 @@ d3.csv("./data/influx-outflux-zurich.csv", function (d) {
             div.transition()
                 .duration(200)
                 .style("opacity", .8);
-            div.html(d.year + '<br>' + "outflux number" + '<br>' + d.outflux)
+            div.html(d.year + '<br>' + "outflux" + '<br>' + d.outflux)
                 .style("left", x(d.year) + "px")
                 .style("top", y(d.outflux) + "px");
             svg_aline.transition().duration(10)

@@ -12,8 +12,8 @@ function plot2() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     bisectDate = d3.bisector(function (d) { return d.year; }).left,
-        formatPercent = d3.format(",.1f"),
-        hoverText = function (d) { return formatPercent(d) + "%"; };
+        formatPercent = d3.format(""),
+        hoverText = function (d) { return formatPercent(d); };
 
     var x = d3.scaleLinear()
         .rangeRound([0, width]);
@@ -37,7 +37,6 @@ function plot2() {
         xAxis = d3.axisBottom().tickFormat(d3.format(".0f")).scale(x);
         yAxis = d3.axisLeft().tickFormat(d => d + "%").scale(y);
         yAxises = d3.axisLeft(y).tickFormat(function (d) { return "" }).tickSizeInner([-width]);
-        // yAxises = d3.axisLeft(y).ticks(12).tickFormat(function (d) { return "" }).tickSizeInner([-width]);
 
         chart1.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -95,8 +94,9 @@ function plot2() {
                 .attr("stroke", "steelblue");
 
             focus.append("text")
-                .attr("x", 9)
-                .attr("dy", ".35em");
+                .attr("x", -25)
+                .attr("dy", "-1em")
+                .style("font", "12px");
 
             chart1.append("rect")
                 .attr("class", "overlay")
@@ -115,7 +115,7 @@ function plot2() {
                     d1 = data[i],
                     d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 focus.attr("transform", "translate(" + x(d.year) + "," + y(d.percent) + ")");
-                focus.select("text").text(hoverText(d.percent) + " in " + (d.year));
+                focus.select("text").text(hoverText(d.year) + " " + (d.percent) + "%");
             }
         });
 
