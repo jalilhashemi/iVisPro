@@ -115,7 +115,7 @@ function plot2() {
                     d1 = data[i],
                     d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 focus.attr("transform", "translate(" + x(d.year) + "," + y(d.percent) + ")");
-                focus.select("text").text(hoverText(d.year) + " " + (d.percent) + "%");
+                focus.select("text").text(hoverText(d.year) + ", " + (d.percent) + "%");
             }
         });
 
