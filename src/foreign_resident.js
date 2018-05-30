@@ -116,12 +116,64 @@ function plot2() {
                     d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 focus.attr("transform", "translate(" + x(d.year) + "," + y(d.percent) + ")");
                 focus.select("text").text(hoverText(d.year) + ", " + (d.percent) + "%");
+                if (d.year > 1901) {
+                    if (d.year < 1914) {
+                        d3.select(".part1").attr("style", "display: block")
+                        .transition()
+                        .duration(6000);
+                        d3.select(".part2").attr("style", "display: none");
+                        d3.select(".part3").attr("style", "display: none");
+                        d3.select(".part4").attr("style", "display: none");
+                        d3.select(".part5").attr("style", "display: none");
+                    }
+                }
+                if (d.year > 1914) {
+                    if (d.year < 1945) {
+                        d3.select(".part2").attr("style", "display: block");
+                        d3.select(".part1").attr("style", "display: none");
+                        d3.select(".part3").attr("style", "display: none");
+                        d3.select(".part4").attr("style", "display: none");
+                        d3.select(".part5").attr("style", "display: none");
+                    }
+                }
+                if (d.year > 1945) {
+                    if (d.year < 1980) {
+                        d3.select(".part3").attr("style", "display: block");
+                        d3.select(".part1").attr("style", "display: none");
+                        d3.select(".part2").attr("style", "display: none");
+                        d3.select(".part4").attr("style", "display: none");
+                        d3.select(".part5").attr("style", "display: none");
+                    }
+                }
+                if (d.year > 1980) {
+                    if (d.year < 2002) {
+                        d3.select(".part4").attr("style", "display: block");
+                        d3.select(".part1").attr("style", "display: none");
+                        d3.select(".part2").attr("style", "display: none");
+                        d3.select(".part3").attr("style", "display: none");
+                        d3.select(".part5").attr("style", "display: none");
+                    }
+                }
+                if (d.year > 2002) {
+                    if (d.year < 2017) {
+                        d3.select(".part5").attr("style", "display: block");
+                        d3.select(".part1").attr("style", "display: none");
+                        d3.select(".part2").attr("style", "display: none");
+                        d3.select(".part3").attr("style", "display: none");
+                        d3.select(".part4").attr("style", "display: none");
+                    }
+                }
             }
         });
 
         d3.select("#reset").on("click", function () {
             d3.select(".line").remove();
             d3.select(".overlay").remove();
+            d3.select(".part5").attr("style", "visibility: visible");
+            d3.select(".part1").attr("style", "visibility: visible");
+            d3.select(".part2").attr("style", "visibility: visible");
+            d3.select(".part3").attr("style", "visibility: visible");
+            d3.select(".part4").attr("style", "visibility: visible");
         });
     })
 };
