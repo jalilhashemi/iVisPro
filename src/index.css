@@ -1,20 +1,35 @@
-footer {
-    height: 50px;
-    background-color: #e9ecef;
-    clear: left;
-    text-align: center;
+.my-header {
+    padding-top: 20px;
+}
+
+.paragraphs {
+    height: 80px;
+}
+
+.paragraph{
+    padding-bottom: -100px;
+    display: none;
+}
+
+.my-footer {
+    padding-bottom: 50px;
 }
 
 footer p {
     padding-top: 15px;
     font-size: 0.8em;
 }
+
+hr.footer-line {
+    margin-top: -15px!important;
+}
+
 a {
-    color: rgba(27, 27, 27, 0.788);
+    color: steelblue;
 }
 
 a:hover {
-    color: black;
+    color: rgb(33, 117, 185);
 }
 
 .my-button {
@@ -106,12 +121,4 @@ div.tooltip {
 #area1 {
     background-image: url("/resource/evolution.jpg");
     background-repeat: no-repeat, repeat;
-}
-
-.paragraph{
-    padding-bottom: -100px;
-}
-
-.jumbotron {
-    min-height: 400px;
 }

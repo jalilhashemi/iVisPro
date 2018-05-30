@@ -67,7 +67,6 @@ function plot2() {
         d3.select("#start").on("click", function () {
             var path = chart1.append("path")
                 .datum(data)
-
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
                 .attr("stroke-linejoin", "round")
@@ -119,8 +118,6 @@ function plot2() {
                 if (d.year > 1901) {
                     if (d.year < 1914) {
                         d3.select(".part1").attr("style", "display: block")
-                        .transition()
-                        .duration(6000);
                         d3.select(".part2").attr("style", "display: none");
                         d3.select(".part3").attr("style", "display: none");
                         d3.select(".part4").attr("style", "display: none");
@@ -169,11 +166,11 @@ function plot2() {
         d3.select("#reset").on("click", function () {
             d3.select(".line").remove();
             d3.select(".overlay").remove();
-            d3.select(".part5").attr("style", "visibility: visible");
-            d3.select(".part1").attr("style", "visibility: visible");
-            d3.select(".part2").attr("style", "visibility: visible");
-            d3.select(".part3").attr("style", "visibility: visible");
-            d3.select(".part4").attr("style", "visibility: visible");
+            d3.select(".part5").attr("style", "display: none");
+            d3.select(".part1").attr("style", "display: none");
+            d3.select(".part2").attr("style", "display: none");
+            d3.select(".part3").attr("style", "display: none");
+            d3.select(".part4").attr("style", "display: none");
         });
     })
 };
