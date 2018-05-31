@@ -68,7 +68,7 @@ function plot2() {
             var path = chart1.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", "steelblue")
+                .attr("stroke", "#4682B4")
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
                 .attr("stroke-width", 3)
@@ -89,8 +89,8 @@ function plot2() {
 
             focus.append("circle")
                 .attr("r", 4.5)
-                .attr("fill", "steelblue")
-                .attr("stroke", "steelblue");
+                .attr("fill", "#4682B4")
+                .attr("stroke", "#4682B4");
 
             focus.append("text")
                 .attr("x", -25)
