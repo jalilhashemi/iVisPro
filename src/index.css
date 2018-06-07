@@ -74,7 +74,7 @@ div.tooltip {
     margin-left: 40px;
     margin-top: -25px;
     font: 12px sans-serif;		
-    background: rgb(70, 131, 180);
+    background: #4682B4;
     color: white;	
     border: 1px;		
     border-radius: 8px;			
@@ -83,7 +83,7 @@ div.tooltip {
 
 .tooltip-line {
     fill: none;
-    stroke: white;
+    stroke: black;
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
@@ -121,4 +121,12 @@ div.tooltip {
 #area1 {
     background-image: url("/resource/evolution.jpg");
     background-repeat: no-repeat, repeat;
+}
+
+.name-div {
+    margin-top: 30px;
+}
+
+#name-p {
+    text-align: right;
 }

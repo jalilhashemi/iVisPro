@@ -5,8 +5,7 @@
   <meta charset="utf-8" />
   <title></title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="src/bootstrap.min.css">
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="src/index.css">
 </head>
@@ -79,19 +78,33 @@
   </div>
   <div class="row my-footer">
     <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-5">
+      <p class="lead">
+        <strong>Achievement & approach</strong>
+      </p>
+      <hr class="my-4 footer-line">
+      <p>Thinking of an effective story</p>
+      <p>Looking for data and selecting the data</p>
+      <p>Planning the optimum visualization for the collected data</p>
+      <p>Creating a sketch</p>
+      <p>Improving the sketch in a more reasonable way</p>
+      <p>Implementing the selected visualization</p>
+      <p>Being suprise about the result</p>
+      <p>Searching for the reason of the output</p>
+    </div>
+    <div class="col-md-5">
       <p class="lead">
         <strong>References</strong>
       </p>
       <hr class="my-4 footer-line">
-      <p>The story of Zürich as a history of immigration
-        <a href="https://m.bazonline.ch/articles/5ab3845cab5c372eb5000001">
-          <i>Basler Zeitung</i>
-        </a>
-      </p>
       <p>Changes in foreign resident population since 1901
         <a href="https://opendata.swiss/de/dataset/bevolkerungsbestand-nach-jahr-herkunft-und-geschlecht-seit-1901/resource/c1c1a976-3b69-4f38-bcce-1a05f5b7696d">
           <i>opendata.swiss</i>
+        </a>
+      </p>
+      <p>The story of Zürich as a history of immigration
+        <a href="https://m.bazonline.ch/articles/5ab3845cab5c372eb5000001">
+          <i>Basler Zeitung</i>
         </a>
       </p>
       <p>Outflux of immigrants since 1971
@@ -104,6 +117,13 @@
           <i>opendata.swiss</i>
         </a>
       </p>
+    </div>
+  </div>
+  <div class="row name-div">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <hr class="my-4 footer-line">
+      <p id="name-p">© Jalil Hashemi & Waleed al-Hubaishi</p>
     </div>
   </div>
   <script src='lib/d3.v4.js'></script>
