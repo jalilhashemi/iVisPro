@@ -119,7 +119,7 @@ div.tooltip {
 }
 
 #area1 {
-    background-image: url("/resource/evolution.jpg");
+    background-image: url("../resource/evolution.jpg");
     background-repeat: no-repeat, repeat;
 }
 
